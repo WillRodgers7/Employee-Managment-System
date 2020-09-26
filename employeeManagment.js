@@ -180,51 +180,78 @@ function mainMenu() {
 // Create Employee
 function mainEmployee() {
 	console.log("creating employee")
-	inquirer
-		.prompt({
-			type: "list",
-			name: "mainEmployee",
-			message: "Please enter Employee Info",
-			choices: [
-				{
-					type: "input",
-					name: "firstName",
-					message: "What is the employees first name?"
-				},
-				{
-					type: "input",
-					name: "lastName",
-					message: "What is the employees last name?"
-				},
-				{
-					type: "input",
-					name: "Role",
-					message: "What is their role?"
-				},
-				{
-					type: "input",
-					name: "Manager",
-					message: "Who is their manager?"
-				},
-			],
-		})
-		.then((res) => {
-			if (res.choice === "firstName") {
-				mainEmployee();
+	inquirer.prompt([
+		{
+			type: "input",
+			name: "firstName",
+			message: "What is the employees first name?"
+		},
+		{
+			type: "input",
+			name: "lastName",
+			message: "What is the employees last name?"
+		},
+		{
+			type: "input",
+			name: "Role",
+			message: "What is their role?"
+		},
+		{
+			type: "input",
+			name: "Manager",
+			message: "Who is their manager?"
+		}
+	])
+	  .then(answers => {
+		console.info('Answer:', answers.firstName);
+		console.info('Answer:', answers.last_name);
+		console.info('Answer:', answers.role_id);
+		console.info('Answer:', answers.manager_id);
+	  });
+	// 	.prompt({
+	// 		type: "list",
+	// 		name: "mainEmployee",
+	// 		message: "Please enter Employee Info",
+	// 		// choices: [
+	// 			{
+	// 				type: "input",
+	// 				name: "firstName",
+	// 				message: "What is the employees first name?"
+	// 			},
+	// 			{
+	// 				type: "input",
+	// 				name: "lastName",
+	// 				message: "What is the employees last name?"
+	// 			},
+	// 			{
+	// 				type: "input",
+	// 				name: "Role",
+	// 				message: "What is their role?"
+	// 			},
+	// 			{
+	// 				type: "input",
+	// 				name: "Manager",
+	// 				message: "Who is their manager?"
+	// 			},
+	// 		// ],
+	// 	}),
+	// 	.then((res) => {
+	// 		if (res.choice === "firstName") {
+	// 			mainEmployee();
 
-			} else if (res.choice === "lastName") {
-				mainEmployee();
+	// 		} else if (res.choice === "lastName") {
+	// 			mainEmployee();
 				
-			} else if (res.choice === "Role") {
-				mainEmployee();
+	// 		} else if (res.choice === "Role") {
+	// 			mainEmployee();
 				
-			} else if (res.choice === "Manager") {
-				mainEmployee();
+	// 		} else if (res.choice === "Manager") {
+	// 			mainEmployee();
 				
-			}
-		});
+	// 		}
+	// 	});
 	
-	};
+	// };
 
 
 
