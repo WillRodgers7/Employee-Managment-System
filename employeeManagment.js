@@ -36,6 +36,7 @@ function addDepartment(name) {
 			console.log(res.affectedRows + " department inserted!\n");
 			// Call addDepartment AFTER the INSERT completes
 			mainMenu();
+			addDepartment(answers.newDepartment);
 		}
 	);
 
@@ -57,6 +58,7 @@ function addRole(title, salary, department_id) {
 			console.log(res.affectedRows + " role inserted!\n");
 			// Call addDepartment AFTER the INSERT completes
 			mainMenu();
+			addRole(answers.newRole, answers.salary, answers.department);
 		}
 	);
 
@@ -79,6 +81,12 @@ function addEmployee(first_name, last_name, role_id, manager_id) {
 			console.log(res.affectedRows + " role inserted!\n");
 			// Call addDepartment AFTER the INSERT completes
 			mainMenu();
+			addEmployee(
+				answers.firstName,
+				answers.lastName,
+				answers.Role,
+				answers.Manager
+			);
 		}
 	);
 
@@ -164,9 +172,9 @@ function mainMenu() {
 			} else if (res.choice === "View Employees") {
 				viewEmployee();
 			} else if (res.choice === "Create Department") {
-				addDepartment();
+				mainDepartment();
 			} else if (res.choice === "Create Role") {
-				addRole();
+				mainRole();
 			} else if (res.choice === "Create Employee") {
 				mainEmployee();
 			} else if (res.choice === "Update Employee Role") {
@@ -201,6 +209,7 @@ function mainEmployee() {
 				message: "Who is their manager?",
 			},
 		])
+
 		.then((answers) => {
 			console.info("Answer:", answers.firstName);
 			console.info("Answer:", answers.lastName);
@@ -239,7 +248,7 @@ function mainRole() {
 		});
 }
 
-// Create Department
+// Create DepartmentTo
 
 function mainDepartment() {
 	console.log("creating department");
