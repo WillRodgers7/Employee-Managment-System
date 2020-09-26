@@ -67,7 +67,7 @@ function addRole(title, salary, department_id) {
 function addEmployee(first_name, last_name, role_id, manager_id) {
 	console.log("Inserting a new employee...\n");
 	var query = connection.query(
-		"INSERT INTO department SET ?",
+		"INSERT INTO employee SET ?",
 		{
 			first_name: first_name,
 			last_name: last_name,
@@ -173,131 +173,86 @@ function mainMenu() {
 				updateRoles();
 			}
 		});
-};
-
-
+}
 
 // Create Employee
 function mainEmployee() {
-	console.log("creating employee")
-	inquirer.prompt([
-		{
-			type: "input",
-			name: "firstName",
-			message: "What is the employees first name?"
-		},
-		{
-			type: "input",
-			name: "lastName",
-			message: "What is the employees last name?"
-		},
-		{
-			type: "input",
-			name: "Role",
-			message: "What is their role?"
-		},
-		{
-			type: "input",
-			name: "Manager",
-			message: "Who is their manager?"
-		}
-	])
-	  .then(answers => {
-		console.info('Answer:', answers.firstName);
-		console.info('Answer:', answers.last_name);
-		console.info('Answer:', answers.role_id);
-		console.info('Answer:', answers.manager_id);
-	  });
-	// 	.prompt({
-	// 		type: "list",
-	// 		name: "mainEmployee",
-	// 		message: "Please enter Employee Info",
-	// 		// choices: [
-	// 			{
-	// 				type: "input",
-	// 				name: "firstName",
-	// 				message: "What is the employees first name?"
-	// 			},
-	// 			{
-	// 				type: "input",
-	// 				name: "lastName",
-	// 				message: "What is the employees last name?"
-	// 			},
-	// 			{
-	// 				type: "input",
-	// 				name: "Role",
-	// 				message: "What is their role?"
-	// 			},
-	// 			{
-	// 				type: "input",
-	// 				name: "Manager",
-	// 				message: "Who is their manager?"
-	// 			},
-	// 		// ],
-	// 	}),
-	// 	.then((res) => {
-	// 		if (res.choice === "firstName") {
-	// 			mainEmployee();
+	console.log("creating employee");
+	inquirer
+		.prompt([
+			{
+				type: "input",
+				name: "firstName",
+				message: "What is the employees first name?",
+			},
+			{
+				type: "input",
+				name: "lastName",
+				message: "What is the employees last name?",
+			},
+			{
+				type: "input",
+				name: "Role",
+				message: "What is their role?",
+			},
+			{
+				type: "input",
+				name: "Manager",
+				message: "Who is their manager?",
+			},
+		])
+		.then((answers) => {
+			console.info("Answer:", answers.firstName);
+			console.info("Answer:", answers.lastName);
+			console.info("Answer:", answers.Role);
+			console.info("Answer:", answers.Manager);
+			mainMenu();
+		});
+}
 
-	// 		} else if (res.choice === "lastName") {
-	// 			mainEmployee();
-				
-	// 		} else if (res.choice === "Role") {
-	// 			mainEmployee();
-				
-	// 		} else if (res.choice === "Manager") {
-	// 			mainEmployee();
-				
-	// 		}
-	// 	});
-	
-	// };
+// Create Role
+function mainRole() {
+	console.log("creating role");
+	inquirer
+		.prompt([
+			{
+				type: "input",
+				name: "newRole",
+				message: "What is the role title?",
+			},
+			{
+				type: "input",
+				name: "salary",
+				message: "What is the salary?",
+			},
+			{
+				type: "input",
+				name: "department",
+				message: "What is the department?",
+			},
+		])
+		.then((answers) => {
+			console.info("Answer:", answers.newRole);
+			console.info("Answer:", answers.salary);
+			console.info("Answer:", answers.department);
+			mainMenu();
+		});
+}
 
+// Create Department
 
-
-		// Create Role 
-		function mainRole() {
-			inquirer
-				.prompt({
-					type: "list",
-					name: "mainRole",
-					message: "Please enter Role Info",
-					choices: [
-						{
-							type: "input",
-							name: "newRole",
-							message: "What is the role title?"
-						},
-						{
-							type: "input",
-							name: "salary",
-							message: "What is the salary?"
-						},
-						{
-							type: "input",
-							name: "department",
-							message: "What is the department?"
-						},
-					],
-				});
-	};
-
-
-
-		// Create Department 
-		function mainRole() {
-			inquirer
-				.prompt({
-					type: "list",
-					name: "mainRole",
-					message: "Please enter Department info",
-					choices: [
-						{
-							type: "input",
-							name: "newDepartment",
-							message: "What is the Department?"
-						},
-					],
-				});
-};
-
+function mainDepartment() {
+	console.log("creating department");
+	inquirer
+		.prompt([
+			{
+				type: "input",
+				name: "newDepartment",
+				message: "What is the Department?",
+			},
+		])
+		.then((answers) => {
+			console.info("Answer:", answers.newDepartment);
+			mainMenu();
+		});
+}
