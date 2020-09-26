@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
 
 	// Your password
 	password: "Wi7ll3ia7m!",
-	database: "greatBay_DB",
+	database: "employees_db",
 });
 
 // connect to the mysql server and sql database
@@ -85,3 +85,97 @@ function addEmployee(first_name, last_name, role_id, manager_id) {
 	// logs the actual query being run
 	console.log(query.sql);
 }
+
+
+// View: Department, Roles, Employees
+function viewDepartment() {
+	console.log("Selecting all departments...\n");
+	connection.query("SELECT * FROM department", function(err, res) {
+	  if (err) throw err;
+	  // Log all results of the SELECT statement
+	  console.log(res);
+	  connection.end();
+	});
+	mainMenu();
+  };
+
+  function viewRole() {
+	console.log("Selecting all roles...\n");
+	connection.query("SELECT * FROM roles", function(err, res) {
+	  if (err) throw err;
+	  // Log all results of the SELECT statement
+	  console.log(res);
+	  connection.end();
+	});
+	mainMenu();
+  };
+
+  function viewEmployee() {
+	console.log("Selecting all employees...\n");
+	connection.query("SELECT * FROM employees", function(err, res) {
+	  if (err) throw err;
+	  // Log all results of the SELECT statement
+	  console.log(res);
+	  connection.end();
+	});
+	mainMenu();
+  };
+
+
+
+//   Update Roles
+  function updateRoles(role_id, employee_id) {
+	console.log("Updating employee role...\n");
+	var query = connection.query(
+	  "UPDATE employee SET ? WHERE ?",
+	  [
+		{
+		  role_id: role_id,
+		},
+		{
+		  id: employee_id,
+		}
+	  ],
+	  function(err, res) {
+		if (err) throw err;
+		console.log(res.affectedRows + " employee updated!\n");
+		
+		
+	  }
+	)};
+
+
+	function mainMenu() {
+		inquirer.prompt({
+			type: "list",
+			name: "choice",
+			message: "What would you like to do?",
+			choices: ["View Department", "View Roles","View Employees", "Create Department", "Create Role", "Create Employee", "Update Employee Role"]
+
+		}) .then((res)=>{
+			if (res.choice === "View Department") {
+				viewDepartment ();
+			} 
+			else if (res.choice === "View Roles"){
+				viewRole ();
+			}
+			else if (res.choice === "View Employees"){
+				viewEmployee ();
+			}
+			else if (res.choice === "Create Department"){
+				addDepartment ();
+			}
+			else if (res.choice === "Create Role"){
+				addRole ();
+			}
+			else if (res.choice === "Create Employee"){
+				addEmployee ();
+			}
+			else if (res.choice === "Update Employee Role"){
+				updateRoles ();
+			}
+			
+
+		})
+		
+	}
