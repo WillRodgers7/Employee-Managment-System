@@ -168,7 +168,7 @@ function mainMenu() {
 			} else if (res.choice === "Create Role") {
 				addRole();
 			} else if (res.choice === "Create Employee") {
-				addEmployee();
+				mainEmployee();
 			} else if (res.choice === "Update Employee Role") {
 				updateRoles();
 			}
@@ -179,6 +179,7 @@ function mainMenu() {
 
 // Create Employee
 function mainEmployee() {
+	console.log("creating employee")
 	inquirer
 		.prompt({
 			type: "list",
@@ -206,7 +207,24 @@ function mainEmployee() {
 					message: "Who is their manager?"
 				},
 			],
+		})
+		.then((res) => {
+			if (res.choice === "firstName") {
+				mainEmployee();
+
+			} else if (res.choice === "lastName") {
+				mainEmployee();
+				
+			} else if (res.choice === "Role") {
+				mainEmployee();
+				
+			} else if (res.choice === "Manager") {
+				mainEmployee();
+				
+			}
 		});
+	
+	};
 
 
 
@@ -230,11 +248,12 @@ function mainEmployee() {
 						},
 						{
 							type: "input",
-							name: "departmetn",
+							name: "department",
 							message: "What is the department?"
 						},
 					],
 				});
+	};
 
 
 
@@ -253,4 +272,5 @@ function mainEmployee() {
 						},
 					],
 				});
+};
 
