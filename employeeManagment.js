@@ -36,7 +36,7 @@ function addDepartment(name) {
 			console.log(res.affectedRows + " department inserted!\n");
 			// Call addDepartment AFTER the INSERT completes
 			mainMenu();
-			addDepartment(answers.newDepartment);
+			// addDepartment(answers.newDepartment);
 		}
 	);
 
@@ -58,7 +58,7 @@ function addRole(title, salary, department_id) {
 			console.log(res.affectedRows + " role inserted!\n");
 			// Call addDepartment AFTER the INSERT completes
 			mainMenu();
-			addRole(answers.newRole, answers.salary, answers.department);
+			// addRole(answers.newRole, answers.salary, answers.department);
 		}
 	);
 
@@ -81,12 +81,12 @@ function addEmployee(first_name, last_name, role_id, manager_id) {
 			console.log(res.affectedRows + " role inserted!\n");
 			// Call addDepartment AFTER the INSERT completes
 			mainMenu();
-			addEmployee(
-				answers.firstName,
-				answers.lastName,
-				answers.Role,
-				answers.Manager
-			);
+			// addEmployee(
+			// 	answers.firstName,
+			// 	answers.lastName,
+			// 	answers.Role,
+			// 	answers.Manager
+			// );
 		}
 	);
 
@@ -100,7 +100,7 @@ function viewDepartment() {
 	connection.query("SELECT * FROM department", function (err, res) {
 		if (err) throw err;
 		// Log all results of the SELECT statement
-		console.log(res);
+		console.table(res);
 		// connection.end();
 	});
 	mainMenu();
@@ -111,7 +111,7 @@ function viewRole() {
 	connection.query("SELECT * FROM roles", function (err, res) {
 		if (err) throw err;
 		// Log all results of the SELECT statement
-		console.log(res);
+		console.table(res);
 		// connection.end();
 	});
 	mainMenu();
@@ -122,7 +122,7 @@ function viewEmployee() {
 	connection.query("SELECT * FROM employee", function (err, res) {
 		if (err) throw err;
 		// Log all results of the SELECT statement
-		console.log(res);
+		console.table(res);
 		// connection.end();
 	});
 	mainMenu();
@@ -215,6 +215,7 @@ function mainEmployee() {
 			console.info("Answer:", answers.lastName);
 			console.info("Answer:", answers.Role);
 			console.info("Answer:", answers.Manager);
+			addEmployee(answers.firstName, answers.lastName, answers.Role, answers.Manager);
 			mainMenu();
 		});
 }
@@ -244,6 +245,8 @@ function mainRole() {
 			console.info("Answer:", answers.newRole);
 			console.info("Answer:", answers.salary);
 			console.info("Answer:", answers.department);
+			addRole(answers.newRole, answers.salary, answers.department);
+			
 			mainMenu();
 		});
 }
@@ -262,6 +265,7 @@ function mainDepartment() {
 		])
 		.then((answers) => {
 			console.info("Answer:", answers.newDepartment);
+			addDepartment(answers.newDepartment);
 			mainMenu();
 		});
 }
