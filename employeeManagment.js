@@ -173,7 +173,84 @@ function mainMenu() {
 				updateRoles();
 			}
 		});
-}
+};
 
 
+
+// Create Employee
+function mainEmployee() {
+	inquirer
+		.prompt({
+			type: "list",
+			name: "mainEmployee",
+			message: "Please enter Employee Info",
+			choices: [
+				{
+					type: "input",
+					name: "firstName",
+					message: "What is the employees first name?"
+				},
+				{
+					type: "input",
+					name: "lastName",
+					message: "What is the employees last name?"
+				},
+				{
+					type: "input",
+					name: "Role",
+					message: "What is their role?"
+				},
+				{
+					type: "input",
+					name: "Manager",
+					message: "Who is their manager?"
+				},
+			],
+		});
+
+
+
+		// Create Role 
+		function mainRole() {
+			inquirer
+				.prompt({
+					type: "list",
+					name: "mainRole",
+					message: "Please enter Role Info",
+					choices: [
+						{
+							type: "input",
+							name: "newRole",
+							message: "What is the role title?"
+						},
+						{
+							type: "input",
+							name: "salary",
+							message: "What is the salary?"
+						},
+						{
+							type: "input",
+							name: "departmetn",
+							message: "What is the department?"
+						},
+					],
+				});
+
+
+
+		// Create Department 
+		function mainRole() {
+			inquirer
+				.prompt({
+					type: "list",
+					name: "mainRole",
+					message: "Please enter Department info",
+					choices: [
+						{
+							type: "input",
+							name: "newDepartment",
+							message: "What is the Department?"
+						},
+					],
+				});
 
