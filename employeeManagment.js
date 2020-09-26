@@ -178,7 +178,7 @@ function mainMenu() {
 			} else if (res.choice === "Create Employee") {
 				mainEmployee();
 			} else if (res.choice === "Update Employee Role") {
-				updateRoles();
+				mainUpdate();
 			}
 		});
 }
@@ -215,7 +215,12 @@ function mainEmployee() {
 			console.info("Answer:", answers.lastName);
 			console.info("Answer:", answers.Role);
 			console.info("Answer:", answers.Manager);
-			addEmployee(answers.firstName, answers.lastName, answers.Role, answers.Manager);
+			addEmployee(
+				answers.firstName,
+				answers.lastName,
+				answers.Role,
+				answers.Manager
+			);
 			mainMenu();
 		});
 }
@@ -246,7 +251,7 @@ function mainRole() {
 			console.info("Answer:", answers.salary);
 			console.info("Answer:", answers.department);
 			addRole(answers.newRole, answers.salary, answers.department);
-			
+
 			mainMenu();
 		});
 }
@@ -266,6 +271,28 @@ function mainDepartment() {
 		.then((answers) => {
 			console.info("Answer:", answers.newDepartment);
 			addDepartment(answers.newDepartment);
+			mainMenu();
+		});
+}
+
+function mainUpdate() {
+	console.log("updating employee");
+	inquirer
+		.prompt([
+			{
+				type: "input",
+				name: "newUpdate",
+				message: "What is the new department?",
+			},
+			{
+				type: "input",
+				name: "newUpdate2",
+				message: "Who is the new manager?",
+			},
+		])
+		.then((answers) => {
+			console.info("Answer:", answers.newUpdate, answers.newUpdate2);
+			updateRoles(answers.newUpdate, answers.newUpdate2);
 			mainMenu();
 		});
 }
