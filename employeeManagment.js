@@ -21,7 +21,7 @@ var connection = mysql.createConnection({
 connection.connect(function (err) {
 	if (err) throw err;
 	// run the start function after the connection is made to prompt the user
-	start();
+	mainMenu();
 });
 
 function addDepartment(name) {
@@ -86,96 +86,94 @@ function addEmployee(first_name, last_name, role_id, manager_id) {
 	console.log(query.sql);
 }
 
-
 // View: Department, Roles, Employees
 function viewDepartment() {
 	console.log("Selecting all departments...\n");
-	connection.query("SELECT * FROM department", function(err, res) {
-	  if (err) throw err;
-	  // Log all results of the SELECT statement
-	  console.log(res);
-	  connection.end();
+	connection.query("SELECT * FROM department", function (err, res) {
+		if (err) throw err;
+		// Log all results of the SELECT statement
+		console.log(res);
+		// connection.end();
 	});
 	mainMenu();
-  };
+}
 
-  function viewRole() {
+function viewRole() {
 	console.log("Selecting all roles...\n");
-	connection.query("SELECT * FROM roles", function(err, res) {
-	  if (err) throw err;
-	  // Log all results of the SELECT statement
-	  console.log(res);
-	  connection.end();
+	connection.query("SELECT * FROM roles", function (err, res) {
+		if (err) throw err;
+		// Log all results of the SELECT statement
+		console.log(res);
+		// connection.end();
 	});
 	mainMenu();
-  };
+}
 
-  function viewEmployee() {
+function viewEmployee() {
 	console.log("Selecting all employees...\n");
-	connection.query("SELECT * FROM employees", function(err, res) {
-	  if (err) throw err;
-	  // Log all results of the SELECT statement
-	  console.log(res);
-	  connection.end();
+	connection.query("SELECT * FROM employee", function (err, res) {
+		if (err) throw err;
+		// Log all results of the SELECT statement
+		console.log(res);
+		// connection.end();
 	});
 	mainMenu();
-  };
-
-
+}
 
 //   Update Roles
-  function updateRoles(role_id, employee_id) {
+function updateRoles(role_id, employee_id) {
 	console.log("Updating employee role...\n");
 	var query = connection.query(
-	  "UPDATE employee SET ? WHERE ?",
-	  [
-		{
-		  role_id: role_id,
-		},
-		{
-		  id: employee_id,
+		"UPDATE employee SET ? WHERE ?",
+		[
+			{
+				role_id: role_id,
+			},
+			{
+				id: employee_id,
+			},
+		],
+		function (err, res) {
+			if (err) throw err;
+			console.log(res.affectedRows + " employee updated!\n");
 		}
-	  ],
-	  function(err, res) {
-		if (err) throw err;
-		console.log(res.affectedRows + " employee updated!\n");
-		
-		
-	  }
-	)};
+	);
+}
 
-
-	function mainMenu() {
-		inquirer.prompt({
+function mainMenu() {
+	inquirer
+		.prompt({
 			type: "list",
 			name: "choice",
 			message: "What would you like to do?",
-			choices: ["View Department", "View Roles","View Employees", "Create Department", "Create Role", "Create Employee", "Update Employee Role"]
-
-		}) .then((res)=>{
-			if (res.choice === "View Department") {
-				viewDepartment ();
-			} 
-			else if (res.choice === "View Roles"){
-				viewRole ();
-			}
-			else if (res.choice === "View Employees"){
-				viewEmployee ();
-			}
-			else if (res.choice === "Create Department"){
-				addDepartment ();
-			}
-			else if (res.choice === "Create Role"){
-				addRole ();
-			}
-			else if (res.choice === "Create Employee"){
-				addEmployee ();
-			}
-			else if (res.choice === "Update Employee Role"){
-				updateRoles ();
-			}
-			
-
+			choices: [
+				"View Department",
+				"View Roles",
+				"View Employees",
+				"Create Department",
+				"Create Role",
+				"Create Employee",
+				"Update Employee Role",
+			],
 		})
-		
-	}
+		.then((res) => {
+			if (res.choice === "View Department") {
+				viewDepartment();
+			} else if (res.choice === "View Roles") {
+				viewRole();
+			} else if (res.choice === "View Employees") {
+				viewEmployee();
+			} else if (res.choice === "Create Department") {
+				addDepartment();
+			} else if (res.choice === "Create Role") {
+				addRole();
+			} else if (res.choice === "Create Employee") {
+				addEmployee();
+			} else if (res.choice === "Update Employee Role") {
+				updateRoles();
+			}
+		});
+}
+
+
+
