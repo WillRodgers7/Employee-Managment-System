@@ -119,6 +119,7 @@ function viewEmployee() {
 	mainMenu();
 }
 
+
 //   Update Roles
 function updateRoles(role_id, employee_id) {
 
@@ -129,8 +130,8 @@ function updateRoles(role_id, employee_id) {
 		
 	}
 
-const { employee_id } = await prompt([
-{
+const { selected_employee_id } = await prompt([
+{_
 	type: "list",
 	name: "employeeId",
 	message: "Which employee's role do you want to update?",
@@ -157,43 +158,6 @@ var query = connection.query(
 };
 
 
-
-// function updateRoles(role_id, employee_id) {
-// 	console.log("Updating employee role...\n");
-// 	var query = connection.query(
-// 		"UPDATE employee SET ? WHERE ?",
-// 		[
-// 			{
-// 				role_id: role_id,
-// 			},
-// 			{
-// 				id: employee_id,
-// 			},
-// 		],
-// 		employeeChoices = []
-
-// for (let index = 0; index < employee_id.length; index++) {
-// 	const element = array[index];
-	
-// },
-
-// const { employee_id } = await prompt([
-//     {
-// 	type: "list",
-//     name: "employeeId",
-//     message: "Which employee's role do you want to update?",
-// 	choices: employeeChoices
-	
-//     }
-// ]);
-// 		function (err, res) {
-// 			if (err) throw err;
-// 			console.log(res.affectedRows + " employee updated!\n");
-// 		}
-
-
-// 	);
-// };
 
 function mainMenu() {
 	inquirer
