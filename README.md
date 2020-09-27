@@ -19,3 +19,8 @@ Step 2: Create and View New Employees
 
 <img width="1440" alt="Screen Shot 2020-09-26 at 7 57 38 PM" src="https://user-images.githubusercontent.com/66852098/94354901-62c04800-0034-11eb-92cd-c5717d672201.png">
 
+
+Step 3: update employees Department or manager
+
+<img width="1440" alt="Screen Shot 2020-09-26 at 9 25 10 PM" src="https://user-images.githubusercontent.com/66852098/94356055-d5362580-003e-11eb-8781-649421dd20da.png">
+
