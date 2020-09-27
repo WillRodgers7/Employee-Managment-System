@@ -81,12 +81,6 @@ function addEmployee(first_name, last_name, role_id, manager_id) {
 			console.log(res.affectedRows + " role inserted!\n");
 			// Call addDepartment AFTER the INSERT completes
 			mainMenu();
-			// addEmployee(
-			// 	answers.firstName,
-			// 	answers.lastName,
-			// 	answers.Role,
-			// 	answers.Manager
-			// );
 		}
 	);
 
@@ -101,7 +95,6 @@ function viewDepartment() {
 		if (err) throw err;
 		// Log all results of the SELECT statement
 		console.table(res);
-		// connection.end();
 	});
 	mainMenu();
 }
@@ -112,7 +105,6 @@ function viewRole() {
 		if (err) throw err;
 		// Log all results of the SELECT statement
 		console.table(res);
-		// connection.end();
 	});
 	mainMenu();
 }
@@ -123,30 +115,85 @@ function viewEmployee() {
 		if (err) throw err;
 		// Log all results of the SELECT statement
 		console.table(res);
-		// connection.end();
 	});
 	mainMenu();
 }
 
 //   Update Roles
 function updateRoles(role_id, employee_id) {
-	console.log("Updating employee role...\n");
-	var query = connection.query(
-		"UPDATE employee SET ? WHERE ?",
-		[
-			{
-				role_id: role_id,
-			},
-			{
-				id: employee_id,
-			},
-		],
-		function (err, res) {
-			if (err) throw err;
-			console.log(res.affectedRows + " employee updated!\n");
-		}
-	);
+
+	employeeChoices = []
+
+	for (let index = 0; index < employee_id.length; index++) {
+		const element = array[index];
+		
+	}
+
+const { employee_id } = await prompt([
+{
+	type: "list",
+	name: "employeeId",
+	message: "Which employee's role do you want to update?",
+	choices: employeeChoices
 }
+]);
+
+console.log("Updating employee role...\n");
+var query = connection.query(
+	"UPDATE employee SET ? WHERE ?",
+	[
+		{
+			role_id: role_id,
+		},
+		{
+			id: employee_id,
+		},
+	],
+	function (err, res) {
+		if (err) throw err;
+		console.log(res.affectedRows + " employee updated!\n");
+	}
+);
+};
+
+
+
+// function updateRoles(role_id, employee_id) {
+// 	console.log("Updating employee role...\n");
+// 	var query = connection.query(
+// 		"UPDATE employee SET ? WHERE ?",
+// 		[
+// 			{
+// 				role_id: role_id,
+// 			},
+// 			{
+// 				id: employee_id,
+// 			},
+// 		],
+// 		employeeChoices = []
+
+// for (let index = 0; index < employee_id.length; index++) {
+// 	const element = array[index];
+	
+// },
+
+// const { employee_id } = await prompt([
+//     {
+// 	type: "list",
+//     name: "employeeId",
+//     message: "Which employee's role do you want to update?",
+// 	choices: employeeChoices
+	
+//     }
+// ]);
+// 		function (err, res) {
+// 			if (err) throw err;
+// 			console.log(res.affectedRows + " employee updated!\n");
+// 		}
+
+
+// 	);
+// };
 
 function mainMenu() {
 	inquirer
@@ -295,4 +342,5 @@ function mainUpdate() {
 			updateRoles(answers.newUpdate, answers.newUpdate2);
 			mainMenu();
 		});
-}
+};
+
