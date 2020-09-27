@@ -119,45 +119,49 @@ function viewEmployee() {
 	mainMenu();
 }
 
-
 //   Update Roles
-function updateRoles(role_id, employee_id) {
-
-	employeeChoices = []
-
-	for (let index = 0; index < employee_id.length; index++) {
-		const element = array[index];
-		
-	}
-
-const { selected_employee_id } = await prompt([
-{_
-	type: "list",
-	name: "employeeId",
-	message: "Which employee's role do you want to update?",
-	choices: employeeChoices
-}
-]);
-
-console.log("Updating employee role...\n");
-var query = connection.query(
-	"UPDATE employee SET ? WHERE ?",
-	[
-		{
-			role_id: role_id,
-		},
-		{
-			id: employee_id,
-		},
-	],
-	function (err, res) {
+async function updateRoles(role_id, employee_id) {
+	employeeChoices = [];
+	connection.query("Select * from employee", function (err, data) {
 		if (err) throw err;
-		console.log(res.affectedRows + " employee updated!\n");
-	}
-);
-};
+		console.log(data);
 
+		let employeeChoices = data.map((person) => ({
+			name: `${person.first_name} ${person.last_name}`,
+			value: person,
+		}));
 
+		inquirer
+			.prompt([
+				{
+					type: "list",
+					name: "employeeId",
+					message: "Which employee's role do you want to update?",
+					choices: employeeChoices,
+				},
+			])
+			.then((res) => {
+
+			});
+
+		console.log("Updating employee role...\n");
+		var query = connection.query(
+			"UPDATE employee SET ? WHERE ?",
+			[
+				{
+					role_id: role_id,
+				},
+				{
+					id: employee_id,
+				},
+			],
+			function (err, res) {
+				if (err) throw err;
+				console.log(res.affectedRows + " employee updated!\n");
+			}
+		);
+	});
+}
 
 function mainMenu() {
 	inquirer
@@ -306,5 +310,4 @@ function mainUpdate() {
 			updateRoles(answers.newUpdate, answers.newUpdate2);
 			mainMenu();
 		});
-};
-
+}
